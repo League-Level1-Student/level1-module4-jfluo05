@@ -5,9 +5,22 @@ int ballRadius=10;
   int carY=200;
   int carSize=20;
   int carSpeed=20;
-Car car1= new Car(1000-50, 100, 20, 5);
-Car car2= new Car(1000-50, 200, 20, 4);
-Car car3= new Car(1000-50, 300, 20, 3);
+  boolean endGame=false;
+  
+int car1Random = (int)random(50, 120);
+int car2Random = (int)random(130, 210);
+int car3Random = (int)random(220, 310);
+int car4Random = (int)random(320, 380);
+
+int car1Speed = (int)random(10,15);
+int car2Speed = (int)random(10,15);
+int car3Speed = (int)random(10,15);
+int car4Speed = (int)random(10,15);
+
+Car car1= new Car(1000-50, car1Random, 20, car1Speed);
+Car car2= new Car(1000-50, car2Random, 20, car2Speed);
+Car car3= new Car(1000-50, car3Random, 20, car3Speed);
+Car car4= new Car(1000-50, car4Random, 20, car4Speed);
 
 void setup(){
   size(1000,400);
@@ -15,22 +28,59 @@ void setup(){
 
 
 void draw(){
+  if(endGame==true){
+    background(255,255,255);
+    textSize(30);
+    text("You WIN!!!!",500,200);
+  }else{
 background(207,246,247);
+
+println("car1 "+car1Speed);
+println("car2 "+car2Speed);
+println("car3 "+car3Speed);
+println("car4 "+car4Speed);
 
 car1.display();
 car2.display();
 car3.display();
+car4.display();
 
 car1.moveLeft();
 car2.moveLeft();
 car3.moveLeft();
+car4.moveLeft();
+
+
+if(y>10){
+endGame=true;
+}
+
+
+if(car1.intersects(x,y,ballRadius)==true){
+ x=15;
+ y=385;
+}
+if(car2.intersects(x,y,ballRadius)==true){
+ x=15;
+ y=385;
+}
+if(car3.intersects(x,y,ballRadius)==true){
+ x=15;
+ y=385;
+}
+if(car4.intersects(x,y,ballRadius)==true){
+ x=15;
+ y=385;
+}
 
 //code for frog
 fill(30, 180, 60);
 ellipse(x, y, 20, 20);
 
 KeepTheFrogIn();
-}
+  }
+
+
 void KeepTheFrogIn(){
 if(x>width-ballRadius){
  x=width-ballRadius; 
@@ -45,7 +95,7 @@ else if(y<ballRadius){
  y=ballRadius; 
 }
 }
-
+  
 void keyPressed()
 {
       if(key == CODED){
@@ -73,7 +123,9 @@ void keyPressed()
                println(x);
                   //Frog X position goes left
             }
-      }}
+      }
+}
+}
       
 class Car{
  int carX;
@@ -98,6 +150,23 @@ void moveLeft(){
   
   if(carX<-40){
     carX=width;
+    
   }
+}
+boolean intersects(int x, int y, int ballRadius) {
+      if ((x+ballRadius>carX && x-ballRadius<carX+carSize && y+ballRadius>carY && y-ballRadius<carY+20)){
+             return true;
+      } else {
+             return false;
+      }
+}
+int getX(){
+  return x;
+}
+int getY(){
+  return y;
+}
+int getSize(){
+  return carSize;
 }
 }
