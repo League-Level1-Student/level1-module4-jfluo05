@@ -3,8 +3,6 @@
  *    Level 1
  */
 
-
-
 import java.applet.AudioClip;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +26,8 @@ public class MediaPalace {
 	}
 
 	/*
-	 * To use this method, the image must be placed in your Eclipse project in the same package as this class.
+	 * To use this method, the image must be placed in your Eclipse project in the
+	 * same package as this class.
 	 */
 	public JLabel loadImageFromWithinProject(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
@@ -45,7 +44,8 @@ public class MediaPalace {
 	}
 
 	/*
-	 * To use this method, you must first download JLayer: http://www.javazoom.net/javalayer/javalayer.html, and add the jar to project.
+	 * To use this method, you must first download JLayer:
+	 * http://www.javazoom.net/javalayer/javalayer.html, and add the jar to project.
 	 * Then uncomment this method.
 	 */
 	// private void playMp3FromComputer(String fileName) throws JavaLayerException {
@@ -76,7 +76,10 @@ public class MediaPalace {
 		}
 	}
 
-	/* If you want to use an mp3, you must first convert it to a .wav file on http://media.io */
+	/*
+	 * If you want to use an mp3, you must first convert it to a .wav file on
+	 * http://media.io
+	 */
 	public AudioClip loadSound(String fileName) {
 		return JApplet.newAudioClip(getClass().getResource(fileName));
 	}
@@ -103,5 +106,3 @@ public class MediaPalace {
 	}
 
 }
-
-
