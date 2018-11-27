@@ -15,12 +15,13 @@ import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
 
-	// We are going to hide secrets within the magic box.
+	 // We are going to hide secrets within the magic box.
 	// When the user clicks on a secret place, stuff will happen.
 	MediaPalace MP = new MediaPalace();
 	// 1. Make the frame respond to mouse clicks.
@@ -36,7 +37,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	public static void main(String[] args) throws Exception {
 
 		SwingUtilities.invokeLater(new MagicBox());
-
+		
 	}
 
 	@Override
@@ -51,15 +52,14 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 
 	private void createUI() {
-
+		
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
-		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.addMouseListener(this);
-
+		frame.pack();	
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -78,17 +78,38 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
 		// TODO Auto-generated method stub
-		System.out.println(e.getLocationOnScreen());
+		int pointX=e.getX();
+		int pointY=e.getY();
+		
+		//System.out.println(e.getLocationOnScreen());
+		System.out.println(pointX+","+pointY);
 		try {
-			MP.loadImageFromTheInternet();
+			MP.loadImageFromTheInternet("https://goo.gl/images/dZ2sYm");
 		} catch (MalformedURLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		MP.loadSound("OpenChest");
-		MP.speak("Sorry, there is nothing in this chest");
-
+	if(pointX<338 && pointX>332 && pointY<170 && pointY>167) {
+	MP.speak("Great job! You found me.");
+	System.out.println("top of tower");
+	}
+	if(pointX<544 && pointX>538 && pointY<372 && pointY>360) {
+		try {
+			JFrame frame1=new JFrame();
+			frame1.setVisible(true);
+			JLabel label= new JLabel();
+			
+			label=MP.loadImageFromTheInternet("https://png.pngtree.com/element_origin_min_pic/16/12/01/44db2834d48a7557f599e6671f26776a.jpg");
+			frame1.add(label);
+			frame1.pack();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println("blue tower");
+		}
 	}
 
 	@Override
